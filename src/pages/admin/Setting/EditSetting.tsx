@@ -34,7 +34,7 @@ const EditSetting = (props: Props) => {
     try {
       if (id) {
         await editSetting(id, data);
-        navigate("/admin/header");
+        navigate("/admin/setting");
       }
     } catch (error) {
       console.log(error);

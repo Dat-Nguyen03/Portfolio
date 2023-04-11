@@ -7,7 +7,7 @@ import { signIn } from "../../api/auth";
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
   const onFinish = async (values: any) => {
-    console.log("Received values of form: ", values);
+    // console.log("Received values of form: ", values);
     const { data: user } = await signIn(values);
     console.log(user);
     localStorage.setItem("user", JSON.stringify(user));
