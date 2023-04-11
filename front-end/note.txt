@@ -11,9 +11,9 @@
 -Admin-
 - Create Project (Check permission)
 - Read Project
-- Edit Project (Check permission)
-- Delete Project (Check permission)
-- Upload file to cloudinary when creata project or edit project
+- Edit Project (Check permission) and update category
+- Delete Project (Check permission) and update category
+- Upload file to cloudinary when creata project or edit project and update category
 
 
 - Create Service (Check permission)
