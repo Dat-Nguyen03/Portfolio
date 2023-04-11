@@ -3,15 +3,18 @@ import { Link } from "react-router-dom";
 import { Button, Space, Table, Tag, Popconfirm, message } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { getAll, removeProject } from "../../../api/project";
+import { IProject } from "../../../interfaces/project";
+import { ITechology } from "../../../interfaces/techology";
+import { ICategory } from "../../../interfaces/category";
 
 type Props = {};
 interface DataType {
   key: string;
   title: string;
-  categort: string;
+  projectCategoryId: ICategory;
   imgUrl: string;
   description: string;
-  technologies: string[];
+  technologyId: ITechology[];
 }
 
 const ListProjects = (props: Props) => {
@@ -35,20 +38,20 @@ const ListProjects = (props: Props) => {
     },
     {
       title: "Category",
-      dataIndex: "category",
-      key: "category",
+      dataIndex: "projectCategoryId",
+      key: "projectCategoryId",
     },
     {
       title: "Techologies",
       dataIndex: "technologies",
       key: "technologies",
-      render: (_, { technologies }) => (
+      render: (_, { technologyId }) => (
         <>
-          {technologies.map((technologi) => {
-            let color = technologi.length > 5 ? "geekblue" : "green";
+          {technologyId.map((technologi, index) => {
+            let color = technologi.name.length > 5 ? "geekblue" : "green";
             return (
-              <Tag color={color} key={technologi} className="mb-2">
-                {technologi.toUpperCase()}
+              <Tag key={index} color={color} className="mb-2">
+                {technologi.name.toUpperCase()}
               </Tag>
             );
           })}
@@ -100,19 +103,20 @@ const ListProjects = (props: Props) => {
     (async () => {
       const { data } = await getAll();
       setProjects(
-        data.map((item: any) => {
+        data.map((item: IProject) => {
           return {
             key: item._id,
             title: item.title,
-            category: item.category,
+            projectCategoryId: item.projectCategoryId.name,
             imgUrl: item.imgUrl,
             description: item.description,
-            technologies: item.technologies,
+            technologyId: item.technologyId,
           };
         })
       );
     })();
   }, []);
+  // console.log(projects);
 
   return <Table columns={columns} dataSource={projects} />;
 };

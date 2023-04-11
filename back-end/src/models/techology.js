@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 
-const projectCategory = new mongoose.Schema(
+const techchologiSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
     },
+
     projects: [
       {
         type: mongoose.Types.ObjectId,
@@ -16,4 +17,4 @@ const projectCategory = new mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
-export default mongoose.model("ProjectCategory", projectCategory);
+export default mongoose.model("Techology", techchologiSchema);

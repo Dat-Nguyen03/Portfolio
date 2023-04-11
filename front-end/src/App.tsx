@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Aos from "aos";
 import "./App.css";
@@ -15,9 +15,26 @@ import ListAbout from "./pages/admin/About/ListAbout";
 import EditAbout from "./pages/admin/About/EditAbout";
 import ListSetting from "./pages/admin/Setting/ListSetting";
 import EditSetting from "./pages/admin/Setting/EditSetting";
+import { IProject } from "./interfaces/project";
+import { ITechology } from "./interfaces/techology";
+import { getTechology } from "./api/techology";
+import { ICategory } from "./interfaces/category";
+import { getCategory } from "./api/category";
 
 function App() {
+  const [techologies, setTechologies] = useState<ITechology[]>([]);
+  const [categories, setCategories] = useState<ICategory[]>([]);
   useEffect(() => {
+    (async () => {
+      const { data } = await getTechology();
+      // console.log(data);
+      setTechologies(data);
+    })();
+    (async () => {
+      const { data } = await getCategory();
+      // console.log(data);
+      setCategories(data);
+    })();
     Aos.init();
   }, []);
   return (
@@ -26,8 +43,18 @@ function App() {
         <Route path="/" element={<UserLayout />} />
         <Route path="admin" element={<AdminLayout />}>
           <Route path="projects" element={<ListProjects />} />
-          <Route path="projects/add" element={<AddProject />} />
-          <Route path="projects/edit/:id" element={<EditProject />} />
+          <Route
+            path="projects/add"
+            element={
+              <AddProject techologies={techologies} categories={categories} />
+            }
+          />
+          <Route
+            path="projects/edit/:id"
+            element={
+              <EditProject techologies={techologies} categories={categories} />
+            }
+          />
           <Route path="services" element={<ListService />} />
           <Route path="services/add" element={<AddService />} />
           <Route path="services/edit/:id" element={<EditService />} />

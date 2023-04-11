@@ -3,14 +3,11 @@ import * as Yup from "yup";
 export const projectSchema = Yup.object({
   title: Yup.string().required("Không được để trống"),
   imgUrl: Yup.mixed().required("Không được để trống"),
-  category: Yup.string().oneOf(["Web Design", "Ux"], "Hãy chọn 1 trường!"),
+  projectCategoryId: Yup.mixed().required("Không được để trống"),
   description: Yup.string()
     .min(20, "Phải nhiều hơn 20 ký tự")
     .required("Không được để trống"),
-  techA: Yup.string(),
-  techB: Yup.string(),
-  techC: Yup.string(),
-  techD: Yup.string(),
+  technologyId: Yup.mixed().required("Không được để trống"),
   siteUrl: Yup.string().required("Không được để trống"),
 });
 
