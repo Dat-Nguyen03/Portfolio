@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { IPortfolio } from "../../interfaces/portfolio";
 import Modal from "./Modal";
 import { getAll } from "../../api/project";
+import { IProject } from "../../interfaces/project";
 
 const Portfolio = () => {
   const [nextItems, setNextItems] = useState<number>(6);
-  const [portfolios, setPortfolios] = useState<IPortfolio[]>([]);
+  const [projects, setProjects] = useState<IProject[]>([]);
   const [selecttab, setSelectTab] = useState<string>("all");
   const [showModal, setShowModal] = useState<boolean>(false);
   const [activeId, setActiveId] = useState<null | string | number>(0);
@@ -31,20 +32,20 @@ const Portfolio = () => {
     (async () => {
       const { data } = await getAll();
       if (selecttab === "all") {
-        setPortfolios(data);
+        setProjects(data);
       }
       if (selecttab === "web-design") {
-        const filterData = data.filter((item: IPortfolio) => {
-          return item.category === "Web Design";
+        const filterData = data.filter((item: IProject) => {
+          return item.projectCategoryId.name === "Web Design";
         });
-        setPortfolios(filterData);
+        setProjects(filterData);
       }
 
       if (selecttab === "ux-design") {
-        const filterData = data.filter((item: IPortfolio) => {
-          return item.category === "Ux";
+        const filterData = data.filter((item: IProject) => {
+          return item.projectCategoryId.name === "Ux";
         });
-        setPortfolios(filterData);
+        setProjects(filterData);
       }
     })();
   }, [selecttab]);
@@ -82,10 +83,10 @@ const Portfolio = () => {
         </div>
 
         <div className="flex items-center gap-4 flex-wrap mt-10">
-          {Array.isArray(portfolios) &&
-            portfolios
+          {Array.isArray(projects) &&
+            projects
               ?.slice(0, nextItems)
-              ?.map((item: IPortfolio, index: number) => (
+              ?.map((item: IProject, index: number) => (
                 <div
                   key={index}
                   data-aos="fade-zoom-in"
@@ -114,9 +115,9 @@ const Portfolio = () => {
               ))}
         </div>
         <div className="text-center mt-6">
-          {portfolios.length <= 3 || portfolios.length <= 6 ? (
+          {projects.length <= 3 || projects.length <= 6 ? (
             ""
-          ) : nextItems >= portfolios.length ? (
+          ) : nextItems >= projects.length ? (
             <button
               onClick={handleLoadLess}
               className="text-white bg-headingColor hover:bg-smallTextColor py-2 px-4 rounded-[8px] font-[500] ease-in duration-200"
@@ -137,7 +138,7 @@ const Portfolio = () => {
         <Modal
           setShowModal={setShowModal}
           activeID={activeId}
-          portfolios={portfolios}
+          projects={projects}
         />
       )}
     </section>

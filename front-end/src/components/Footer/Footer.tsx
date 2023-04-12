@@ -1,6 +1,7 @@
 import React from "react";
 import { ISetting } from "../../interfaces/setting";
 import { IICon } from "../../interfaces/icon";
+import { Link } from "react-router-dom";
 type Props = {
   footerData: ISetting[];
   icons: IICon[];
@@ -79,7 +80,11 @@ const Footer = ({ footerData, icons }: Props) => {
           <div className="flex items-center justify-center sm:justify-between">
             <div className="hidden sm:block">
               {footerData.map((item, index) => (
-                <div className="flex items-center gap-[10px]" key={index}>
+                <a
+                  href="#"
+                  className="flex items-center gap-[10px]"
+                  key={index}
+                >
                   <span className="w-[35px] h-[35px] rounded-full bg-[#2b2d33] text-white font-[500] text-[18px] flex items-center justify-center">
                     {item.logoTitle}
                   </span>
@@ -92,7 +97,7 @@ const Footer = ({ footerData, icons }: Props) => {
                       {item.smallTitle}
                     </p>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
             <div className="text-gray-400 tetx-[14px]">

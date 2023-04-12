@@ -29,7 +29,7 @@ const Header = ({ headerData }: Props) => {
       <div className="container">
         <div className="flex items-center justify-between">
           {headerData.map((item, index) => (
-            <div className="flex items-center gap-[10px]" key={index}>
+            <a href="#" className="flex items-center gap-[10px]" key={index}>
               <span className="w-[35px] h-[35px] bg-primaryColor text-white text-[18px] font-[500] rounded-full flex items-center justify-center">
                 {item.logoTitle}
               </span>
@@ -42,7 +42,7 @@ const Header = ({ headerData }: Props) => {
                   {item.smallTitle}
                 </p>
               </div>
-            </div>
+            </a>
           ))}
 
           <div className="menu" ref={menuRef} onClick={toggleMenu}>

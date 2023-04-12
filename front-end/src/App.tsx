@@ -15,7 +15,6 @@ import ListAbout from "./pages/admin/About/ListAbout";
 import EditAbout from "./pages/admin/About/EditAbout";
 import ListSetting from "./pages/admin/Setting/ListSetting";
 import EditSetting from "./pages/admin/Setting/EditSetting";
-import { IProject } from "./interfaces/project";
 import { ITechology } from "./interfaces/techology";
 import { getTechology } from "./api/techology";
 import { ICategory } from "./interfaces/category";
